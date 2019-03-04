@@ -4,3 +4,4 @@
 * The inserted text should be only of type int even if the input is of type text - make a validation ;)
 * The result text should be injected in the DOM at the node where the parantheses are
 * The same applies for error
+* Change only the `index.js` file
