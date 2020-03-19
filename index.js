@@ -5,6 +5,9 @@ const myFunction = () => {
   let fourthOperand = Number(document.getElementById("fourthOperand").value);
   let sum = firstOperand + secondOperand;
   document.getElementById("result").innerHTML = sum;
-  console.log(typeof sum);
-  console.log(secondOperand);
+  //   --------------------------------->
+  const allSelectElements = document.querySelectorAll("select");
+  for (let i = 0; i < allSelectElements.length; i++) {
+    console.log(allSelectElements[i].value, "Asta");
+  }
 };
