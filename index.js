@@ -12,7 +12,16 @@ const myFunction = () => {
   let fourthOperand = Number(document.getElementById("fourthOperand").value);
   let res, res1, res2;
   const operation = document.querySelectorAll("select");
-
+  // error handling
+  if (
+    isNaN(firstOperand) ||
+    isNaN(secondOperand) ||
+    isNaN(thirdOperand) ||
+    isNaN(fourthOperand)
+  ) {
+    errorMessage.innerHTML =
+      "Please insert only numbers ! (tip: numbers can't start with 0, '.', '/' etc";
+  }
   //   ---------------------------------------------->
   if (
     // check if 000 :
