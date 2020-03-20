@@ -1,3 +1,10 @@
+const errorMessage = document.querySelector(
+  "div.row article ul li div div ul li div"
+);
+const resultMessage = document.querySelector(
+  "div.row:last-of-type article ul li div div ul li div"
+);
+
 const myFunction = () => {
   let firstOperand = Number(document.getElementById("firstOperand").value);
   let secondOperand = Number(document.getElementById("secondOperand").value);
@@ -5,6 +12,7 @@ const myFunction = () => {
   let fourthOperand = Number(document.getElementById("fourthOperand").value);
   let res, res1, res2;
   const operation = document.querySelectorAll("select");
+
   //   ---------------------------------------------->
   if (
     // check if 000 :
@@ -195,5 +203,5 @@ const myFunction = () => {
       res = res1 - res;
     }
   }
-  document.getElementById("result").innerHTML = res;
+  resultMessage.innerHTML = res;
 };
