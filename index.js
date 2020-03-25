@@ -1,4 +1,7 @@
 const inputElementsValidState = {};
+const errMsgView = document.querySelector(".row article ul ul div");
+const resultView = document.querySelector(".row:last-child article ul ul div");
+const calculateButton = document.querySelector('button');
 
 const checkAllInputElementsOk = () => {
     let allOK = true;
@@ -32,9 +35,14 @@ const alertIfNotANumber = ({target}) => {
         inputElementsValidState[target.id] = 'valid';
     }
     if (checkAllInputElementsOk()) {
-        document.querySelector('button').classList.remove('hideElement');
+        calculateButton.classList.remove('hideElement');
+        errMsgView.innerText = 'All clear. No Errors ! :]';   
+        errMsgView.classList.remove('inputNotValid');
+
     } else {
-        document.querySelector('button').classList.add('hideElement');   
+        calculateButton.classList.add('hideElement');
+        errMsgView.innerText = 'All input fields whould have valid numbers (inlcuding 0)';   
+        errMsgView.classList.add('inputNotValid');
     }  
 }
 
@@ -47,3 +55,4 @@ inputElementsArr.forEach(field => {
         alertIfNotANumber(event);
     } )
 })
+
