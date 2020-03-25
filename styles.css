@@ -7,3 +7,12 @@
 ul {
     list-style-type: none;
 }
+
+.inputNotValid {
+  background-color: coral;
+  border: 2px solid red;
+}
+
+.hideElement {
+  visibility: hidden;
+}
