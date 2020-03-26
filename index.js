@@ -10,9 +10,7 @@ let fourthOperand =  document.getElementById("fourthOperand");
 resultContainer.innerHTML = '';
 errorContainer.innerHTML = '';
 
-// Get the operation sign 
-
-// A FOR LOOP or something to respect DRY !!!!!!!!!//////////////////////
+// Get the operation sign   --- >>  (TO DO: A FOR LOOP or something to respect DRY !!!!!!!!!)
 let op = document.getElementsByName("operations");
 var operationSign1 = op[0].options[op[0].selectedIndex].text;
 op[0].addEventListener('change', function(event) {
@@ -32,13 +30,11 @@ op[1].addEventListener('change', function(event) {
 
 //Calculate 
 
-
-
 calculateButton.addEventListener('click', function() {    
     resultContainer.innerHTML = '';
     errorContainer.innerHTML = '';
     
-    // A FUNCTION : DRY !!!
+    // (TO DO: A FUNCTION : DRY !!!)
     if (operationSign1 == ":") {
         operationSign1 = '/'
     }
@@ -48,10 +44,7 @@ calculateButton.addEventListener('click', function() {
     if (operationSign3 == ":") {
         operationSign3 = '/'
     }
-
     let sum = eval (`${parseInt(firstOperand.value)}  ${operationSign1}  ${parseInt(secondOperand.value)} ${operationSign2} ${parseInt(thirdOperand.value)} ${operationSign3} ${parseInt(fourthOperand.value)}`)
-    
-    console.log(sum)
     if (!sum) {
        errorContainer.innerHTML = "Error!!! not a number"
     } else {
@@ -60,17 +53,13 @@ calculateButton.addEventListener('click', function() {
 })
 
 
-
-
-
 // CHECK IF INPUT TYPE IS NUMBER 
-
-// NUMLOCK NUMBERS 96-105 !!!!!!!!!!!!!!!!!!!!!!
-
 function checkIfNumber(operand) {
     operand.addEventListener("keyup", (evt)=> { 
+        resultContainer.innerHTML = '';
+        // errorContainer.innerHTML = '';  
         let ASCIICode = evt.keyCode;
-        if (ASCIICode >= 48 && ASCIICode <= 57) {
+        if ((ASCIICode >= 48 && ASCIICode <= 57) || (ASCIICode >= 96 && ASCIICode <= 105)){
         } else if (ASCIICode == 8) {
             operand.style.border = "";
             errorContainer.innerHTML = "";
