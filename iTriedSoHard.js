@@ -1,3 +1,4 @@
+// GLOBAL VARIABLES ------------------------------------------------>
 const errorMessage = document.querySelector(
     "div.row article ul li div div ul li div"
   ),
@@ -5,45 +6,56 @@ const errorMessage = document.querySelector(
     "div.row:last-of-type article ul li div div ul li div"
   );
 
-const calculate = () => {
-  // need both number and string values
-  let firstOperand = document.getElementById("firstOperand").value,
-    secondOperand = document.getElementById("secondOperand").value,
-    thirdOperand = document.getElementById("thirdOperand").value,
-    fourthOperand = document.getElementById("fourthOperand").value,
-    firstNumber = Number(firstOperand),
-    secondNumber = Number(secondOperand),
-    thirdNumber = Number(thirdOperand),
-    fourthNumber = Number(fourthOperand),
-    res,
-    res1,
-    res2;
-  const operation = document.querySelectorAll("select");
-  // error handling ------------------------------------------->
-  if (
-    isNaN(firstNumber) ||
-    isNaN(secondNumber) ||
-    isNaN(thirdNumber) ||
-    isNaN(fourthNumber)
-  ) {
+// Declaring functions --------------------------------------------->
+// Error Functions -------------------------->
+const checkIfNumber = (arg1, arg2, arg3, arg4) => {
+  if (isNaN(arg1) || isNaN(arg2) || isNaN(arg3) || isNaN(arg4)) {
     errorMessage.innerHTML = "Please insert only numbers !";
-  } else if (
-    // check if number has 0es at begining
-    (firstOperand[0] == 0 && firstOperand.length >= 2) ||
-    (secondOperand[0] == 0 && secondOperand.length >= 2) ||
-    (thirdOperand[0] == 0 && thirdOperand.length >= 2) ||
-    (fourthOperand[0] == 0 && fourthOperand.length >= 2)
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const checkIfZeroBegin = (arg1, arg2, arg3, arg4) => {
+  if (
+    (arg1[0] == 0 && arg1.length >= 2) ||
+    (arg2[0] == 0 && arg2.length >= 2) ||
+    (arg3[0] == 0 && thirdOperand.length >= 2) ||
+    (arg4[0] == 0 && arg4.length >= 2)
   ) {
     errorMessage.innerHTML = "Numbers can't start with 0 !";
-  } else if (
-    // cant divide by 0 condition
-    (operation[0].value == "division" && secondNumber == 0) ||
-    (operation[1].value == "division" && thirdNumber == 0) ||
-    (operation[2].value == "division" && fourthNumber == 0)
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const checkIfDivide = (op, arg2, arg3, arg4) => {
+  if (
+    (op[0].value == "division" && arg2 == 0) ||
+    (op[1].value == "division" && arg3 == 0) ||
+    (op[2].value == "division" && arg4 == 0)
   ) {
     errorMessage.innerHTML = "Cant divide by 0 !";
-  } else if (
-    // start of calculus ----------------------------------------------->
+    return false;
+  } else {
+    return true;
+  }
+};
+
+// Calculus function -------------------------->
+const calculate = (
+  operation,
+  res,
+  res1,
+  res2,
+  firstNumber,
+  secondNumber,
+  thirdNumber,
+  fourthNumber
+) => {
+  if (
     // check if 000 :
     operation[0].value !== "multiplication" &&
     operation[0].value !== "division" &&
@@ -232,6 +244,60 @@ const calculate = () => {
       res = res1 - res;
     }
   }
-  // display result
+  // display
   resultMessage.innerHTML = res;
+};
+
+// Error handling -> calculus ------------------>
+// const errorHandler = (func1, func2, func3, func4) => {
+//     if (func1() && func2() && func3()) {
+//         func4();
+//     }
+// };
+
+// Put it all together function ---------------------------------------------------->
+const display = () => {
+  // need both number and string values
+  let firstOperand = document.getElementById("firstOperand").value,
+    secondOperand = document.getElementById("secondOperand").value,
+    thirdOperand = document.getElementById("thirdOperand").value,
+    fourthOperand = document.getElementById("fourthOperand").value,
+    firstNumber = Number(firstOperand),
+    secondNumber = Number(secondOperand),
+    thirdNumber = Number(thirdOperand),
+    fourthNumber = Number(fourthOperand),
+    res,
+    res1,
+    res2;
+  const operation = document.querySelectorAll("select");
+  // MAGIC
+  const errorHandler = (
+    checkIfNumber,
+    checkIfZeroBegin,
+    checkIfDivide,
+    calculate
+  ) => {
+    if (
+      checkIfNumber(firstNumber, secondNumber, thirdNumber, fourthNumber) &&
+      checkIfZeroBegin(
+        firstOperand,
+        secondOperand,
+        thirdOperand,
+        fourthOperand
+      ) &&
+      checkIfDivide(operation, secondNumber, thirdNumber, fourthNumber)
+    ) {
+      calculate(
+        operation,
+        res,
+        res1,
+        res2,
+        firstNumber,
+        secondNumber,
+        thirdNumber,
+        fourthNumber
+      );
+    }
+  };
+  errorHandler();
 };
