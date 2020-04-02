@@ -6,41 +6,40 @@ const errorMessage = document.querySelector(
   );
 
 const myFunction = () => {
-  let firstOperand = Number(document.getElementById("firstOperand").value),
-    secondOperand = Number(document.getElementById("secondOperand").value),
-    thirdOperand = Number(document.getElementById("thirdOperand").value),
-    fourthOperand = Number(document.getElementById("fourthOperand").value),
-    primu = document.getElementById("firstOperand").value,
+  // need both number and string values
+  let firstOperand = document.getElementById("firstOperand").value,
+    secondOperand = document.getElementById("secondOperand").value,
+    thirdOperand = document.getElementById("thirdOperand").value,
+    fourthOperand = document.getElementById("fourthOperand").value,
+    firstNumber = Number(firstOperand),
+    secondNumber = Number(secondOperand),
+    thirdNumber = Number(thirdOperand),
+    fourthNumber = Number(fourthOperand),
     res,
     res1,
     res2;
   const operation = document.querySelectorAll("select");
   // error handling
   if (
-    isNaN(firstOperand) ||
-    isNaN(secondOperand) ||
-    isNaN(thirdOperand) ||
-    isNaN(fourthOperand)
+    isNaN(firstNumber) ||
+    isNaN(secondNumber) ||
+    isNaN(thirdNumber) ||
+    isNaN(fourthNumber)
   ) {
-    errorMessage.innerHTML =
-      "Please insert only numbers ! (tip: numbers can't start with 0, '.', '/' etc";
+    errorMessage.innerHTML = "Please insert only numbers !";
   } else if (
     // check if number has 0es at begining
-    // (document.getElementById("firstOperand").value[0] == 0 &&
-    (primu[0] == 0 && primu.length >= 2) ||
-    (document.getElementById("secondOperand").value[0] == 0 &&
-      document.getElementById("secondOperand").value.length >= 2) ||
-    (document.getElementById("thirdOperand").value[0] == 0 &&
-      document.getElementById("thirdOperand").value.length >= 2) ||
-    (document.getElementById("fourthOperand").value[0] == 0 &&
-      document.getElementById("fourthOperand").value.length >= 2)
+    (firstOperand[0] == 0 && firstOperand.length >= 2) ||
+    (secondOperand[0] == 0 && secondOperand.length >= 2) ||
+    (thirdOperand[0] == 0 && thirdOperand.length >= 2) ||
+    (fourthOperand[0] == 0 && fourthOperand.length >= 2)
   ) {
     errorMessage.innerHTML = "Numbers can't start with 0 !";
   } else if (
     // cant divide by 0 condition
-    (operation[0].value == "division" && secondOperand == 0) ||
-    (operation[1].value == "division" && thirdOperand == 0) ||
-    (operation[2].value == "division" && fourthOperand == 0)
+    (operation[0].value == "division" && secondNumber == 0) ||
+    (operation[1].value == "division" && thirdNumber == 0) ||
+    (operation[2].value == "division" && fourthNumber == 0)
   ) {
     errorMessage.innerHTML = "Cant divide by 0 !";
   } else if (
@@ -52,21 +51,20 @@ const myFunction = () => {
     operation[2].value !== "multiplication" &&
     operation[2].value !== "division"
   ) {
-    //   ---------------------------------------------->
     if (operation[0].value == "addition") {
-      res = firstOperand + secondOperand;
+      res = firstNumber + secondNumber;
     } else if (operation[0].value == "substraction") {
-      res = firstOperand - secondOperand;
+      res = firstNumber - secondNumber;
     }
     if (operation[1].value == "addition") {
-      res = res + thirdOperand;
+      res = res + thirdNumber;
     } else if (operation[1].value == "substraction") {
-      res = res - thirdOperand;
+      res = res - thirdNumber;
     }
     if (operation[2].value == "addition") {
-      res = res + fourthOperand;
+      res = res + fourthNumber;
     } else if (operation[2].value == "substraction") {
-      res = res - fourthOperand;
+      res = res - fourthNumber;
     }
   } else if (
     // check if 111
@@ -77,19 +75,19 @@ const myFunction = () => {
     (operation[2].value == "multiplication" || operation[2].value == "division")
   ) {
     if (operation[0].value == "multiplication") {
-      res = firstOperand * secondOperand;
+      res = firstNumber * secondNumber;
     } else if (operation[0].value == "division") {
-      res = firstOperand / secondOperand;
+      res = firstNumber / secondNumber;
     }
     if (operation[1].value == "multiplication") {
-      res = res * thirdOperand;
+      res = res * thirdNumber;
     } else if (operation[1].value == "division") {
-      res = res / thirdOperand;
+      res = res / thirdNumber;
     }
     if (operation[2].value == "multiplication") {
-      res = res * fourthOperand;
+      res = res * fourthNumber;
     } else if (operation[2].value == "division") {
-      res = res / fourthOperand;
+      res = res / fourthNumber;
     }
   } else if (
     // check if 110
@@ -101,19 +99,19 @@ const myFunction = () => {
       operation[2].value !== "division")
   ) {
     if (operation[0].value == "multiplication") {
-      res = firstOperand * secondOperand;
+      res = firstNumber * secondNumber;
     } else if (operation[0].value == "division") {
-      res = firstOperand / secondOperand;
+      res = firstNumber / secondNumber;
     }
     if (operation[1].value == "multiplication") {
-      res = res * thirdOperand;
+      res = res * thirdNumber;
     } else if (operation[1].value == "division") {
-      res = res / thirdOperand;
+      res = res / thirdNumber;
     }
     if (operation[2].value == "addition") {
-      res = res + fourthOperand;
+      res = res + fourthNumber;
     } else if (operation[2].value == "substraction") {
-      res = res - fourthOperand;
+      res = res - fourthNumber;
     }
   } else if (
     // check if 101
@@ -124,14 +122,14 @@ const myFunction = () => {
     (operation[2].value == "multiplication" || operation[2].value == "division")
   ) {
     if (operation[0].value == "multiplication") {
-      res = firstOperand * secondOperand;
+      res = firstNumber * secondNumber;
     } else if (operation[0].value == "division") {
-      res = firstOperand / secondOperand;
+      res = firstNumber / secondNumber;
     }
     if (operation[2].value == "multiplication") {
-      res1 = thirdOperand * fourthOperand;
+      res1 = thirdNumber * fourthNumber;
     } else if (operation[2].value == "division") {
-      res1 = thirdOperand / fourthOperand;
+      res1 = thirdNumber / fourthNumber;
     }
     if (operation[1].value == "addition") {
       res = res + res1;
@@ -147,19 +145,19 @@ const myFunction = () => {
     (operation[2].value == "multiplication" || operation[2].value == "division")
   ) {
     if (operation[1].value == "multiplication") {
-      res1 = secondOperand * thirdOperand;
+      res1 = secondNumber * thirdNumber;
     } else if (operation[1].value == "division") {
-      res1 = secondOperand / thirdOperand;
+      res1 = secondNumber / thirdNumber;
     }
     if (operation[2].value == "multiplication") {
-      res2 = res1 * fourthOperand;
+      res2 = res1 * fourthNumber;
     } else if (operation[2].value == "division") {
-      res2 = res1 / fourthOperand;
+      res2 = res1 / fourthNumber;
     }
     if (operation[0].value == "addition") {
-      res = firstOperand + res2;
+      res = firstNumber + res2;
     } else if (operation[0].value == "substraction") {
-      res = firstOperand - res2;
+      res = firstNumber - res2;
     }
   } else if (
     // check if 100
@@ -171,19 +169,19 @@ const myFunction = () => {
       operation[2].value !== "division")
   ) {
     if (operation[0].value == "multiplication") {
-      res = firstOperand * secondOperand;
+      res = firstNumber * secondNumber;
     } else if (operation[0].value == "division") {
-      res = firstOperand / secondOperand;
+      res = firstNumber / secondNumber;
     }
     if (operation[1].value == "addition") {
-      res = res + thirdOperand;
+      res = res + thirdNumber;
     } else if (operation[1].value == "substraction") {
-      res = res - thirdOperand;
+      res = res - thirdNumber;
     }
     if (operation[2].value == "addition") {
-      res = res + fourthOperand;
+      res = res + fourthNumber;
     } else if (operation[2].value == "substraction") {
-      res = res - fourthOperand;
+      res = res - fourthNumber;
     }
   } else if (
     // check if 010
@@ -195,19 +193,19 @@ const myFunction = () => {
       operation[2].value !== "division")
   ) {
     if (operation[1].value == "multiplication") {
-      res = secondOperand * thirdOperand;
+      res = secondNumber * thirdNumber;
     } else if (operation[1].value == "division") {
-      res = secondOperand / thirdOperand;
+      res = secondNumber / thirdNumber;
     }
     if (operation[0].value == "addition") {
-      res = firstOperand + res;
+      res = firstNumber + res;
     } else if (operation[0].value == "substraction") {
-      res = firstOperand - res;
+      res = firstNumber - res;
     }
     if (operation[2].value == "addition") {
-      res = res + fourthOperand;
+      res = res + fourthNumber;
     } else if (operation[2].value == "substraction") {
-      res = res - fourthOperand;
+      res = res - fourthNumber;
     }
   } else if (
     // check if 001
@@ -218,14 +216,14 @@ const myFunction = () => {
     (operation[2].value == "multiplication" || operation[2].value == "division")
   ) {
     if (operation[2].value == "multiplication") {
-      res = thirdOperand * fourthOperand;
+      res = thirdNumber * fourthNumber;
     } else if (operation[2].value == "division") {
-      res = thirdOperand / fourthOperand;
+      res = thirdNumber / fourthNumber;
     }
     if (operation[0].value == "addition") {
-      res1 = firstOperand + secondOperand;
+      res1 = firstNumber + secondNumber;
     } else if (operation[0].value == "substraction") {
-      res1 = firstOperand - secondOperand;
+      res1 = firstNumber - secondNumber;
     }
     if (operation[1].value == "addition") {
       res = res1 + res;

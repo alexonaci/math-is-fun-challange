@@ -1,4 +1,4 @@
 // const anotherFunc = () => {
-//   let primu = document.getElementById("firstOperand").value;
-//   alert(primu, "yo");
+//   const operation = document.querySelectorAll("select").value;
+//   console.log(document.querySelectorAll("select")[0].value, "yo");
 // };
