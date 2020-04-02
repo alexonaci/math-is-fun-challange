@@ -1,16 +1,19 @@
 const errorMessage = document.querySelector(
-  "div.row article ul li div div ul li div"
-);
-const resultMessage = document.querySelector(
-  "div.row:last-of-type article ul li div div ul li div"
-);
+    "div.row article ul li div div ul li div"
+  ),
+  resultMessage = document.querySelector(
+    "div.row:last-of-type article ul li div div ul li div"
+  );
 
 const myFunction = () => {
-  let firstOperand = Number(document.getElementById("firstOperand").value);
-  let secondOperand = Number(document.getElementById("secondOperand").value);
-  let thirdOperand = Number(document.getElementById("thirdOperand").value);
-  let fourthOperand = Number(document.getElementById("fourthOperand").value);
-  let res, res1, res2;
+  let firstOperand = Number(document.getElementById("firstOperand").value),
+    secondOperand = Number(document.getElementById("secondOperand").value),
+    thirdOperand = Number(document.getElementById("thirdOperand").value),
+    fourthOperand = Number(document.getElementById("fourthOperand").value),
+    primu = document.getElementById("firstOperand").value,
+    res,
+    res1,
+    res2;
   const operation = document.querySelectorAll("select");
   // error handling
   if (
@@ -21,9 +24,26 @@ const myFunction = () => {
   ) {
     errorMessage.innerHTML =
       "Please insert only numbers ! (tip: numbers can't start with 0, '.', '/' etc";
-  }
-  //   ---------------------------------------------->
-  if (
+  } else if (
+    // check if number has 0es at begining
+    // (document.getElementById("firstOperand").value[0] == 0 &&
+    (primu[0] == 0 && primu.length >= 2) ||
+    (document.getElementById("secondOperand").value[0] == 0 &&
+      document.getElementById("secondOperand").value.length >= 2) ||
+    (document.getElementById("thirdOperand").value[0] == 0 &&
+      document.getElementById("thirdOperand").value.length >= 2) ||
+    (document.getElementById("fourthOperand").value[0] == 0 &&
+      document.getElementById("fourthOperand").value.length >= 2)
+  ) {
+    errorMessage.innerHTML = "Numbers can't start with 0 !";
+  } else if (
+    // cant divide by 0 condition
+    (operation[0].value == "division" && secondOperand == 0) ||
+    (operation[1].value == "division" && thirdOperand == 0) ||
+    (operation[2].value == "division" && fourthOperand == 0)
+  ) {
+    errorMessage.innerHTML = "Cant divide by 0 !";
+  } else if (
     // check if 000 :
     operation[0].value !== "multiplication" &&
     operation[0].value !== "division" &&
@@ -32,6 +52,7 @@ const myFunction = () => {
     operation[2].value !== "multiplication" &&
     operation[2].value !== "division"
   ) {
+    //   ---------------------------------------------->
     if (operation[0].value == "addition") {
       res = firstOperand + secondOperand;
     } else if (operation[0].value == "substraction") {
