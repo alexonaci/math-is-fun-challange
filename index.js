@@ -2,6 +2,7 @@ const validInput = {};
 const errorMessage = document.querySelector(".row article ul ul div");
 const error = document.querySelector(".row article ul ul");
 const resultMessage = document.querySelector(".row:last-child article ul ul div");
+const result = document.querySelector(".row:last-child article ul ul");
 const calculateBtn = document.querySelector("button");
 
 const validateInputNumber = (number) => {
@@ -36,10 +37,14 @@ const inputError = ({target}) => {
         errorMessage.classList.add("invalidInput");
         error.classList.remove("hideElement");
         errorMessage.classList.remove("hideElement");
+        resultMessage.classList.add("hideElement");
+        result.classList.add("hideElement");
     } else {
         errorMessage.classList.remove("invalidInput");
         errorMessage.classList.add("hideElement");
         error.classList.add("hideElement");
+        resultMessage.classList.remove("hideElement");
+        result.classList.remove("hideElement");
     }
 }
 
@@ -52,3 +57,52 @@ inputs.forEach(field => {
     })
 })
 
+const opSymbol = (value) => {
+    let operation = "";
+
+    switch (value) {
+        case "addition":
+            operation = "+";
+            break;
+        case "substraction":
+            operation = "-";
+            break;
+        case "multiplication":
+            operation = "*";
+            break;
+        case "division":
+            operation = "/";
+            break;
+    }
+
+    return operation;
+}
+
+const calculate = () => {
+    let result = "";
+    const getAllInputs = [...document.querySelectorAll("input, select")];
+    console.log(getAllInputs);
+
+    getAllInputs.forEach(element => {
+        if(element.tagName === "SELECT") {
+            const operation = opSymbol(element.value);
+            result += operation;          
+        } else {
+            result += parseInt(element.value);
+        }
+    })
+
+    return eval(result);
+}
+
+const display = (message, result) => {
+    message.innerText = result;
+    resultMessage.classList.add("validResult");
+}
+
+const calculateAndDisplay = () => {
+    const result = calculate();
+    display(resultMessage, result);
+}
+
+calculateBtn.addEventListener("click", calculateAndDisplay);
