@@ -7,3 +7,12 @@
 ul {
     list-style-type: none;
 }
+
+.hideElement {
+  visibility: hidden;
+}
+
+.invalidInput {
+  background-color: red;
+  color: white;
+}
