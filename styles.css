@@ -16,3 +16,9 @@ ul {
   background-color: red;
   color: white;
 }
+
+.validResult {
+  background-color: rgb(19, 156, 7);
+  color: white;
+  text-align: center;
+}
